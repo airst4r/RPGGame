@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Armor.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="IArmor.cs" />
     <Compile Include="IWeapon.cs" />
     <Compile Include="Program.cs" />

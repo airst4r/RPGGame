@@ -11,14 +11,16 @@ namespace RPGGame
     {
         static void Main(string[] args)
         {
+            Random rand = new Random();
             Console.WriteLine("Hello! That's my first game");
-            Weapon w1 = new Weapon(35,15,"Sword",7,75);
-            w1.Damage();
-            w1.CritDamage();
-            Armor a1 = new Armor(50, 200, "Medium armor", 30, 30);
-            a1.BlockSpell();
-            a1.Evade();
-            a1.TotalDef();
+            //WeaponConstructor - baseDamage,critModificator,weaponType,penetration,presision
+            //ArmorConstructor - baseArmor,bonusHealth,armorType,evasion,magicResist
+            Weapon w1 = null;
+            for (int i = 0; i < 10; i++) {
+                w1 = Weapon.GenerateWeapon(rand.Next(50), rand.Next(15), "Sword", rand.Next(10), rand.Next(20));
+                Console.WriteLine(w1.ToString());
+                i++;
+            }
         }
     }
 }

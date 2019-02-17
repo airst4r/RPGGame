@@ -59,5 +59,15 @@ namespace RPGGame
             Console.WriteLine("Doing critial damage");
             return 1.5;
         }
+
+        public static Weapon GenerateWeapon(double bd,double cm,string wt,double pn,int pr)
+        {
+            return new Weapon(bd,cm,wt,pn,pr);
+        }
+        public override string ToString()
+        {
+            string result = WeaponType +" "+BaseDamage + " " + CritModificator + " " + Penetration + " " + Precision;
+            return result;
+        }
     }
 }
