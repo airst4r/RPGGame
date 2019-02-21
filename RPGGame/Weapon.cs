@@ -13,6 +13,8 @@ namespace RPGGame
         private string weaponType;
         private double penetration;
         private int precision;
+        int rariry;
+        Random rand = new Random();
 
         public Weapon()
         {
@@ -68,6 +70,30 @@ namespace RPGGame
         {
             string result = WeaponType +" "+BaseDamage + " " + CritModificator + " " + Penetration + " " + Precision;
             return result;
+        }
+        public string WeaponInfo()
+        {
+            string creationResult = null;
+            creationResult += Weapon.GenerateWeapon(rand.Next(50), rand.Next(15), "Sword", rand.Next(10), rand.Next(20));
+
+            rariry = rand.Next((int)Enums.RareGenerator.white, (int)Enums.RareGenerator.violet);
+            if (rariry < (int)Enums.RareGenerator.white)
+                creationResult += " Rarity: " + Enums.RareGenerator.white;
+            else if (rariry < (int)Enums.RareGenerator.green)
+                creationResult += " Rarity: " + Enums.RareGenerator.green;
+            else if (rariry < (int)Enums.RareGenerator.blue)
+                creationResult += " Rarity: " + Enums.RareGenerator.blue;
+            else if (rariry < (int)Enums.RareGenerator.orange)
+                creationResult += " Rarity: " + Enums.RareGenerator.orange;
+            else if (rariry < (int)Enums.RareGenerator.red)
+                creationResult += " Rarity: " + Enums.RareGenerator.red;
+            else
+            {
+                creationResult += " Rarity: " + Enums.RareGenerator.violet;
+                int bonus = rand.Next((int)Enums.UniquePrefWep.Quickest, (int)Enums.UniquePrefWep.Precision);
+                creationResult += " Bonus: " + Enum.GetName(typeof(Enums.UniquePrefWep), bonus);
+            }
+            return creationResult;
         }
     }
 }

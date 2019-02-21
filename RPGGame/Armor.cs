@@ -8,6 +8,8 @@ namespace RPGGame
 {
     class Armor:IArmor
     {
+        Random rand = new Random();
+        private int rarity;
         private double baseArmor;
         private string armorType;
         private double magicResist;
@@ -19,7 +21,7 @@ namespace RPGGame
         public string ArmorType { get; set; }
         public double Evasion { get; set; }
         public double MagicResist { get; set; }
-
+        
         public Armor()
         {
             BaseArmor = 10;
@@ -64,6 +66,38 @@ namespace RPGGame
         {
             Console.WriteLine("Block magic");
             return 1;
+        }
+        public override string ToString()
+        {
+            string result = BaseArmor + " " + BonusHealth + " " + ArmorType + " " + Evasion + " " + MagicResist;
+            return result;
+        }
+        public Armor GenerateArmor(double ba, double bh, string at, double ev, double mr)
+        {
+            return new Armor(ba, bh, at, ev, mr);
+        }
+        public string ArmorInfo()
+        {
+            string creationResult = null;
+            creationResult += this.GenerateArmor(rand.Next(50), rand.Next(15), "Torse", rand.Next(10), rand.Next(20));
+            rarity = rand.Next((int)Enums.RareGenerator.white, (int)Enums.RareGenerator.violet);
+            if (this.rarity < (int)Enums.RareGenerator.white)
+                creationResult += " Rarity: " + Enums.RareGenerator.white;
+            else if (this.rarity < (int)Enums.RareGenerator.green)
+                creationResult += " Rarity: " + Enums.RareGenerator.green;
+            else if (this.rarity < (int)Enums.RareGenerator.blue)
+                creationResult += " Rarity: " + Enums.RareGenerator.blue;
+            else if (this.rarity < (int)Enums.RareGenerator.orange)
+                creationResult += " Rarity: " + Enums.RareGenerator.orange;
+            else if (this.rarity < (int)Enums.RareGenerator.red)
+                creationResult += " Rarity: " + Enums.RareGenerator.red;
+            else
+            {
+                creationResult += " Rarity: " + Enums.RareGenerator.violet;
+                int bonus = rand.Next((int)Enums.UniquePerfArm.Impenetrable, (int)Enums.UniquePerfArm.Tenacious);
+                creationResult += " Bonus: " + Enum.GetName(typeof(Enums.UniquePerfArm), bonus);
+            }
+            return creationResult;
         }
     }
 }
